@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title data-i18n="meta_title">MoneyChange - Currency Exchange in Torrevieja</title>
+    <meta name="description" data-i18n="meta_description" content="Best currency exchange rates in Torrevieja. Exchange EUR, USD, GBP and other currencies with no commission. Fast and safe money exchange service.">
+    <meta name="keywords" data-i18n="meta_keywords" content="currency exchange, money exchange, forex, Torrevieja, euros, dollars, pounds">
+    <link rel="canonical" href="https://moneychange.es/prices" />
+    <meta property="og:title" content="MoneyChange - Currency Exchange in Torrevieja" />
+    <meta property="og:description" content="Best currency exchange rates in Torrevieja. Exchange EUR, USD, GBP and other currencies with no commission." />
+    <meta property="og:image" content="https://moneychange.es/images/og-image.jpg" />
+    <meta property="og:url" content="https://moneychange.es/prices" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="stylesheet" href="css/style.css?v=1.1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1E88E5;
+            --primary-light: #64B5F6;
+            --primary-dark: #0D47A1;
+            --secondary-color: #29B6F6;
+            --bg-light: #FFFFFF;
+            --bg-dark: #F5F9FF;
+            --text-dark: #263238;
+            --text-light: #ECEFF1;
+            --accent-color: #00BCD4;
+        }
+        
+        /* Убираем все отступы по умолчанию */
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Темная тема - активна по умолчанию */
+        html[data-theme="dark"] {
+            --primary-color: #0D47A1;
+            --primary-light: #1976D2;
+            --primary-dark: #0D2C5A;
+            --secondary-color: #01579B;
+            --bg-light: #263238;
+            --bg-dark: #1A2327;
+            --text-dark: #ECEFF1;
+            --text-light: #263238;
+            --accent-color: #0288D1;
+        }
+        
+        /* Светлая тема */
+        html[data-theme="light"] {
+            --primary-color: #1E88E5;
+            --primary-light: #64B5F6;
+            --primary-dark: #0D47A1;
+            --secondary-color: #29B6F6;
+            --bg-light: #FFFFFF;
+            --bg-dark: #F5F9FF;
+            --text-dark: #263238;
+            --text-light: #ECEFF1;
+            --accent-color: #00BCD4;
+        }
+        
+        .header-top {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 0;
+        }
+        
+        .currency-images {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .card-img-top, .card-img-back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.5s ease;
+        }
+        
+        .card-img-back {
+            opacity: 0;
+        }
+        
+        .currency-card:hover .card-img-top {
+            opacity: 0;
+        }
+        
+        .currency-card:hover .card-img-back {
+            opacity: 1;
+        }
+        
+        .currency-flag {
+            width: 24px;
+            height: 18px;
+            margin-right: 8px;
+            vertical-align: middle;
+            border-radius: 2px;
+            box-shadow: 0 0 1px rgba(0,0,0,0.2);
+            object-fit: cover;
+        }
+
+        .currency-ticker-container {
+            width: 100vw;
+            overflow: hidden;
+            color: white;
+            padding: 8px 0;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            margin-top: 0;
+            background-color: #000000;
+        }
+
+        /* Скрываем тикер акций */
+        .stocks-ticker-container {
+            display: none;
+        }
+        
+        .currency-ticker {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin: 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        
+        .ticker-content {
+            display: inline-flex;
+            animation: ticker 300s linear infinite;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Скрываем контент тикера акций */
+        .stocks-content {
+            display: none;
+        }
+        
+        .ticker-content span {
+            display: inline-block;
+            padding: 0 25px;
+            margin: 0 5px;
+        }
+
+        .ticker-content span strong {
+            font-weight: 700;
+            margin-right: 5px;
+        }
+
+        /* Скрываем стили для тикера акций */
+        .stocks-content .text-success,
+        .stocks-content .text-danger {
+            display: none;
+        }
+        
+        @keyframes ticker {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        
+        /* Стили для rates-section */
+        .rates-section {
+            padding: 30px 0;
+            background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-dark) 100%);
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+        }
+        
+        .rates-section .container {
+            max-width: 1140px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Удаляем тикер валют -->
+    <!--
+    <div class="currency-ticker-container">
+        <div class="currency-ticker">
+            <div class="ticker-content" id="ticker-content">
+                <span>EUR/USD 1.0860</span>
+                <span>EUR/GBP 0.8525</span>
+                <span>EUR/CHF 0.9720</span>
+                <span>EUR/JPY 164.67</span>
+                <span>EUR/AUD 1.6520</span>
+                <span>EUR/CAD 1.4734</span>
+                <span>EUR/NOK 11.3670</span>
+                <span>EUR/SEK 11.6390</span>
+                <span>EUR/DKK 7.4535</span>
+                <span>EUR/RON 4.9560</span>
+                <span>EUR/BGN 1.9558</span>
+                <span>EUR/CZK 25.2300</span>
+                <span>EUR/PLN 4.3185</span>
+                <span>EUR/HUF 394.25</span>
+                <span>EUR/RUB 97.2350</span>
+            </div>
+        </div>
+    </div>
+    -->
+
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="row py-1 align-items-center">
+                    <div class="col-md-8">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-map-marker-alt me-2 text-danger fa-lg"></i>
+                            <span class="header-location">Torrevieja (Alicante)</span>
+                            <span class="mx-3">|</span>
+                            <i class="fas fa-phone-alt me-2 text-success fa-lg"></i>
+                            <span class="header-phone">(+34) 634-001-344</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <div class="language-flags">
+                            <a href="#" class="lang-flag" data-lang="en"><img src="images/flags/gb.svg" alt="English" width="24" class="me-1"></a>
+                            <a href="#" class="lang-flag" data-lang="es"><img src="images/flags/es.svg" alt="Español" width="24" class="me-1"></a>
+                            <a href="#" class="lang-flag" data-lang="ru"><img src="images/flags/ru.svg" alt="Русский" width="24"></a>
+                        </div>
+                        <a href="/contact-2" class="contact-btn">
+                            <i class="fas fa-envelope me-2"></i>
+                            <span data-i18n="contact_us">CONTACT US</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container py-1">
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    <div class="logo-wrapper">
+                        <h1 class="logo-text">MONEY<span>CHANGE</span></h1>
+                        <p class="logo-subtitle">CAMBIO MONEDA <span class="highlight">EXCHANGE</span></p>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <nav class="main-nav">
+                        <ul class="nav nav-pills justify-content-end">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/" data-i18n="home">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/prices" data-i18n="prices">Prices</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/contact-2" data-i18n="contact">Contact</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Exchange Rates Section -->
+        <section class="rates-section py-5">
+            <div class="container">
+                <h1 class="text-center mb-4" data-i18n="current_prices">Current Prices</h1>
+                <p class="text-center mb-5" data-i18n="up_to_date_rates">Up-to-date prices, updated regularly</p>
+
+                <div class="d-flex align-items-center mb-3">
+                    <div class="bg-primary" style="width: 50px; height: 3px; margin-right: 15px;"></div>
+                    <h5 class="mb-0 text-uppercase" data-i18n="exchange_rates">Exchange Rates</h5>
+                    <div class="bg-primary" style="width: 50px; height: 3px; margin-left: 15px;"></div>
+                </div>
+                <h2 class="section-title mb-2" data-i18n="available_prices">Available Prices</h2>
+
+                <div class="table-responsive">
+                    <table class="table table-striped rates-table">
+                        <thead>
+                            <tr>
+                                <th data-i18n="currency_column">Currency</th>
+                                <th data-i18n="buy_column">Buy</th>
+                                <th data-i18n="sell_column">Sell</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>🇺🇸 <span data-i18n="usd_full">US Dollar</span> (USD)</td>
+                                <td>0.9</td>
+                                <td>0.9488</td>
+                            </tr>
+                            <tr>
+                                <td>🇨🇦 <span data-i18n="cad_full">Canadian Dollar</span> (CAD)</td>
+                                <td>0.63</td>
+                                <td>0.6641</td>
+                            </tr>
+                            <tr>
+                                <td>🇳🇴 <span data-i18n="nok_full">Norwegian Krone</span> (NOK)</td>
+                                <td>0.0859</td>
+                                <td>0.0906</td>
+                            </tr>
+                            <tr>
+                                <td>🇸🇪 <span data-i18n="sek_full">Swedish Krona</span> (SEK)</td>
+                                <td>0.09</td>
+                                <td>0.0948</td>
+                            </tr>
+                            <tr>
+                                <td>🇩🇰 <span data-i18n="dkk_full">Danish Krone</span> (DKK)</td>
+                                <td>0.1305</td>
+                                <td>0.1376</td>
+                            </tr>
+                            <tr>
+                                <td>🇬🇧 <span data-i18n="gbp_full">British Pound</span> (GBP)</td>
+                                <td>1.1649</td>
+                                <td>1.228</td>
+                            </tr>
+                            <tr>
+                                <td>🇨🇭 <span data-i18n="chf_full">Swiss Franc</span> (CHF)</td>
+                                <td>1.0202</td>
+                                <td>1.0756</td>
+                            </tr>
+                            <tr>
+                                <td>🇵🇱 <span data-i18n="pln_full">Polish Złoty</span> (PLN)</td>
+                                <td>0.2338</td>
+                                <td>0.2464</td>
+                            </tr>
+                            <tr>
+                                <td>🇨🇿 <span data-i18n="czk_full">Czech Koruna</span> (CZK)</td>
+                                <td>0.0391</td>
+                                <td>0.0413</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-end mt-2">
+                    <small class="text-muted"><span data-i18n="last_updated">Last updated</span>: <span id="last-update-time">-</span></small>
+                </div>
+            </div>
+        </section>
+
+        <!-- Currencies Information Section -->
+        <section class="currencies-section py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <div class="d-flex align-items-center justify-content-center mb-2">
+                        <div class="bg-primary" style="width: 50px; height: 3px; margin-right: 15px;"></div>
+                        <h5 class="mb-0 text-uppercase" data-i18n="currencies">Currencies</h5>
+                        <div class="bg-primary" style="width: 50px; height: 3px; margin-left: 15px;"></div>
+                    </div>
+                    <h2 class="section-title mb-2" data-i18n="available_currencies">Available Currencies</h2>
+                    <p class="section-subtitle text-muted" data-i18n="detailed_info">Detailed information about each currency we exchange</p>
+                </div>
+
+                <div class="row g-4">
+                    <!-- US Dollar Card -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="currency-card card h-100 border-0 shadow-sm">
+                            <div class="currency-images">
+                                <img src="images/new/usd-100-front.jpg" class="card-img-top" alt="100 USD bill front">
+                                <img src="images/new/usd-100-back.jpg" class="card-img-back" alt="100 USD bill back">
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <img src="images/flags/us.svg" alt="US Flag" class="currency-flag me-2" style="width: 30px;">
+                                    <h5 class="card-title mb-0">US Dollar (USD)</h5>
+                                </div>
+                                <p class="card-text">Exchange US Dollars to Euros or Euros to US Dollars with the best rates and no commission fees.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="currency-rate">1 USD ≈ 0.92 EUR</span>
+                                    <a href="/currencies/usd" class="btn btn-outline-primary btn-sm" data-i18n="more_info">More Info</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- British Pound Card -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="currency-card card h-100 border-0 shadow-sm">
+                            <div class="currency-images">
+                                <img src="images/currencies/gbp/funt20.jpg" class="card-img-top" alt="20 GBP note front">
+                                <img src="images/currencies/gbp/funt20.2.jpg" class="card-img-back" alt="20 GBP note back">
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <img src="images/flags/gb.svg" alt="UK Flag" class="currency-flag me-2" style="width: 30px;">
+                                    <h5 class="card-title mb-0" data-i18n="currency_pound">British Pound (GBP)</h5>
+                                </div>
+                                <p class="card-text">Get the best exchange rates for British Pounds. Whether you're traveling to the UK or returning.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="currency-rate">1 GBP ≈ 1.17 EUR</span>
+                                    <a href="/currencies/gbp" class="btn btn-outline-primary btn-sm" data-i18n="more_info">More Info</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Swiss Franc Card -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="currency-card card h-100 border-0 shadow-sm">
+                            <div class="currency-images">
+                                <img src="images/currencies/chf/CHF20.jpg" class="card-img-top" alt="20 CHF note front">
+                                <img src="images/currencies/chf/CHF20.2.jpg" class="card-img-back" alt="20 CHF note back">
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <img src="images/flags/ch.svg" alt="Swiss Flag" class="currency-flag me-2" style="width: 30px;">
+                                    <h5 class="card-title mb-0" data-i18n="currency_franc">Swiss Franc (CHF)</h5>
+                                </div>
+                                <p class="card-text" data-i18n="chf_description">Exchange Swiss Francs at competitive rates. One of the world's most stable currencies with unique design.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="currency-rate">1 CHF ≈ 0.96 EUR</span>
+                                    <a href="/currencies/chf" class="btn btn-outline-primary btn-sm" data-i18n="more_info">More Info</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Australian Dollar Card -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="currency-card card h-100 border-0 shadow-sm">
+                            <div class="currency-images">
+                                <img src="images/new/aud-100-front.jpg" class="card-img-top" alt="100 AUD note front">
+                                <img src="images/new/aud-100-back.jpg" class="card-img-back" alt="100 AUD note back">
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <img src="images/flags/au.svg" alt="Australian flag" class="currency-flag me-2" style="width: 30px;">
+                                    <h5 class="card-title mb-0">Australian Dollar (AUD)</h5>
+                                </div>
+                                <p class="card-text">The official currency of Australia, known for its colorful polymer notes. Get the best rates for AUD exchange.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="currency-rate">1 AUD ≈ 0.61 EUR</span>
+                                    <a href="/currencies/aud" class="btn btn-outline-primary btn-sm">More Info</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Canadian Dollar Card -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="currency-card card h-100 border-0 shadow-sm">
+                            <div class="currency-images">
+                                <img src="images/currencies/cad/cad-100-front.jpg" class="card-img-top" alt="100 CAD note front">
+                                <img src="images/currencies/cad/cad-100-back.jpg" class="card-img-back" alt="100 CAD note back">
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <img src="images/flags/ca.svg" alt="Canadian Flag" class="currency-flag me-2" style="width: 30px;">
+                                    <h5 class="card-title mb-0">Canadian Dollar (CAD)</h5>
+                                </div>
+                                <p class="card-text">Exchange Canadian Dollars with competitive rates. Known for colorful polymer banknotes with enhanced security features.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="currency-rate">1 CAD ≈ 0.67 EUR</span>
+                                    <a href="/currencies/cad" class="btn btn-outline-primary btn-sm" data-i18n="more_info">More Info</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Danish Krone Card -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="currency-card card h-100 border-0 shadow-sm">
+                            <div class="currency-images">
+                                <img src="images/currencies/dkk/dkk-100-front.jpg" class="card-img-top" alt="100 DKK note front">
+                                <img src="images/currencies/dkk/dkk-100-back.jpg" class="card-img-back" alt="100 DKK note back">
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <img src="images/flags/dk.svg" alt="Danish Flag" class="currency-flag me-2" style="width: 30px;">
+                                    <h5 class="card-title mb-0">Danish Krone (DKK)</h5>
+                                </div>
+                                <p class="card-text">Get great rates on Danish Krone. The banknotes feature Danish bridges and prehistoric artifacts found in Denmark.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="currency-rate">1 DKK ≈ 0.13 EUR</span>
+                                    <a href="/currencies/dkk" class="btn btn-outline-primary btn-sm" data-i18n="more_info">More Info</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Norwegian Krone Card -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="currency-card card h-100 border-0 shadow-sm">
+                            <div class="currency-images">
+                                <img src="images/currencies/nok/krona100.jpg" class="card-img-top" alt="100 NOK note front">
+                                <img src="images/currencies/nok/krona100.2.jpg" class="card-img-back" alt="100 NOK note back">
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <img src="images/flags/no.svg" alt="Norwegian Flag" class="currency-flag me-2" style="width: 30px;">
+                                    <h5 class="card-title mb-0" data-i18n="currency_krone">Norwegian Krone (NOK)</h5>
+                                </div>
+                                <p class="card-text">Exchange Norwegian Krone with competitive rates. Modern banknotes with beautiful marine-themed designs.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="currency-rate">1 NOK ≈ 0.09 EUR</span>
+                                    <a href="/currencies/nok" class="btn btn-outline-primary btn-sm" data-i18n="more_info">More Info</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Swedish Krona Card -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="currency-card card h-100 border-0 shadow-sm">
+                            <div class="currency-images">
+                                <img src="images/currencies/sek/sek-100-front.jpg" class="card-img-top" alt="100 SEK note front">
+                                <img src="images/currencies/sek/sek-100-back.jpg" class="card-img-back" alt="100 SEK note back">
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <img src="images/flags/se.svg" alt="Swedish Flag" class="currency-flag me-2" style="width: 30px;">
+                                    <h5 class="card-title mb-0">Swedish Krona (SEK)</h5>
+                                </div>
+                                <p class="card-text">Exchange Swedish Krona with the best rates. The banknotes feature famous Swedish personalities and landmarks.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="currency-rate">1 SEK ≈ 0.09 EUR</span>
+                                    <a href="/currencies/sek" class="btn btn-outline-primary btn-sm" data-i18n="more_info">More Info</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h3 class="footer-logo">MONEY<span>CHANGE</span></h3>
+                    <p class="footer-subtitle">FAST & SAFE EXCHANGE</p>
+                    <p class="mt-3">&copy; 2025 MoneyChange. All rights reserved.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Useful links</h5>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/currencies">Currencies</a></li>
+                        <li><a href="/contact-2" data-i18n="contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-4">Contact Us</h5>
+                    <div class="contact-item d-flex align-items-center mb-3">
+                        <div class="icon-circle phone me-3">
+                            <i class="fas fa-phone-alt text-white"></i>
+                        </div>
+                        <span>(+34) 634-001-344</span>
+                    </div>
+                    <div class="contact-item d-flex align-items-center mb-3">
+                        <div class="icon-circle phone me-3">
+                            <i class="fas fa-phone-alt text-white"></i>
+                        </div>
+                        <span>(+34) 602-486-566</span>
+                    </div>
+                    <div class="contact-item d-flex align-items-center">
+                        <div class="icon-circle email me-3">
+                            <i class="fas fa-envelope text-white"></i>
+                        </div>
+                        <span>moneychangetorrevieja@gmail.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/ticker.js"></script>
+    <script src="js/locale.js"></script>
+    <script src="js/locales/en.js"></script>
+    <script src="js/locales/es.js"></script>
+    <script src="js/locales/ru.js"></script>
+    <script src="js/exchange-rates.js"></script>
+
+    <script>
+        // Theme toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Инициализация переключателя темы
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = themeToggle.querySelector('i');
+            
+            if (localStorage.getItem('theme') === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+            
+            themeToggle.addEventListener('click', function() {
+                if (document.documentElement.getAttribute('data-theme') === 'dark') {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                    localStorage.setItem('theme', 'light');
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                }
+            });
+            
+            // Инициализация локализации
+            setupLanguageFlags();
+            applyStoredOrDefaultLanguage();
+        });
+        
+        // Настройка обработчиков для языковых флагов
+        function setupLanguageFlags() {
+            document.querySelectorAll('.lang-flag').forEach(flag => {
+                flag.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const lang = this.getAttribute('data-lang');
+                    changeLanguage(lang);
+                });
+            });
+        }
+        
+        // Применение сохраненного языка или определение языка браузера
+        function applyStoredOrDefaultLanguage() {
+            const storedLang = localStorage.getItem('selectedLanguage');
+            
+            if (storedLang) {
+                changeLanguage(storedLang);
+            } else {
+                // Определяем язык браузера
+                const browserLang = navigator.language || navigator.userLanguage;
+                
+                if (browserLang.startsWith('es')) {
+                    changeLanguage('es');
+                } else if (browserLang.startsWith('ru')) {
+                    changeLanguage('ru');
+                } else {
+                    // По умолчанию - английский
+                    changeLanguage('en');
+                }
+            }
+        }
+        
+        // Изменение языка
+        function changeLanguage(lang) {
+            // Сохраняем выбранный язык
+            localStorage.setItem('selectedLanguage', lang);
+            
+            // Обновляем активный класс языкового флага
+            document.querySelectorAll('.lang-flag').forEach(flag => {
+                if (flag.getAttribute('data-lang') === lang) {
+                    flag.classList.add('active');
+                } else {
+                    flag.classList.remove('active');
+                }
+            });
+            
+            // Применяем переводы
+            let translations;
+            
+            switch (lang) {
+                case 'en':
+                    translations = window.enTranslations || {};
+                    break;
+                case 'es':
+                    translations = window.esTranslations || {};
+                    break;
+                case 'ru':
+                    translations = window.ruTranslations || {};
+                    break;
+                default:
+                    translations = window.enTranslations || {};
+            }
+            
+            // Применяем переводы ко всем элементам с атрибутом data-i18n
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                
+                if (translations[key]) {
+                    // Для полей ввода обновляем placeholder или value
+                    if (element.tagName === 'INPUT') {
+                        if (element.hasAttribute('placeholder')) {
+                            element.placeholder = translations[key];
+                        } else {
+                            element.value = translations[key];
+                        }
+                    } else {
+                        element.textContent = translations[key];
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html> 
