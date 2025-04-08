@@ -237,7 +237,7 @@
                             <a href="#" class="lang-flag" data-lang="es"><img src="images/flags/es.svg" alt="Español" width="24" class="me-1"></a>
                             <a href="#" class="lang-flag" data-lang="ru"><img src="images/flags/ru.svg" alt="Русский" width="24"></a>
                         </div>
-                        <a href="/contact-2" class="contact-btn">
+                        <a href="/contact" class="contact-btn">
                             <i class="fas fa-envelope me-2"></i>
                             <span data-i18n="contact_us">CONTACT US</span>
                         </a>
@@ -264,7 +264,7 @@
                                 <a class="nav-link active" href="/prices" data-i18n="prices">Prices</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/contact-2" data-i18n="contact">Contact</a>
+                                <a class="nav-link" href="/contact" data-i18n="contact">Contact</a>
                             </li>
                         </ul>
                     </nav>
@@ -288,65 +288,54 @@
                 <h2 class="section-title mb-2" data-i18n="available_prices">Available Prices</h2>
 
                 <div class="table-responsive">
-                    <table class="table table-striped rates-table">
-                        <thead>
+                    <table class="table table-hover table-striped rates-table shadow-sm rounded overflow-hidden">
+                        <thead class="table-light">
                             <tr>
-                                <th data-i18n="currency_column">Currency</th>
-                                <th data-i18n="buy_column">Buy</th>
-                                <th data-i18n="sell_column">Sell</th>
+                                <th class="py-3 ps-4">CURRENCY</th>
+                                <th class="py-3">WE BUY (EUR)</th>
+                                <th class="py-3 pe-4">WE SELL (EUR)</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="mainPageRatesTable">
+                            <!-- Статическая структура таблицы -->
                             <tr>
-                                <td>🇺🇸 <span data-i18n="usd_full">US Dollar</span> (USD)</td>
-                                <td>0.9</td>
-                                <td>0.9488</td>
+                                <td><img src="/images/flags/us.svg" alt="USD" class="currency-flag"> USD</td>
+                                <td class="rate-buy rate-buy-USD">---</td>
+                                <td class="rate-sell rate-sell-USD">---</td>
                             </tr>
-                            <tr>
-                                <td>🇨🇦 <span data-i18n="cad_full">Canadian Dollar</span> (CAD)</td>
-                                <td>0.63</td>
-                                <td>0.6641</td>
+                             <tr>
+                                <td><img src="/images/flags/ca.svg" alt="CAD" class="currency-flag"> CAD</td>
+                                <td class="rate-buy rate-buy-CAD">---</td>
+                                <td class="rate-sell rate-sell-CAD">---</td>
                             </tr>
-                            <tr>
-                                <td>🇳🇴 <span data-i18n="nok_full">Norwegian Krone</span> (NOK)</td>
-                                <td>0.0859</td>
-                                <td>0.0906</td>
+                             <tr>
+                                <td><img src="/images/flags/no.svg" alt="NOK" class="currency-flag"> NOK</td>
+                                <td class="rate-buy rate-buy-NOK">---</td>
+                                <td class="rate-sell rate-sell-NOK">---</td>
                             </tr>
-                            <tr>
-                                <td>🇸🇪 <span data-i18n="sek_full">Swedish Krona</span> (SEK)</td>
-                                <td>0.09</td>
-                                <td>0.0948</td>
+                             <tr>
+                                <td><img src="/images/flags/se.svg" alt="SEK" class="currency-flag"> SEK</td>
+                                <td class="rate-buy rate-buy-SEK">---</td>
+                                <td class="rate-sell rate-sell-SEK">---</td>
                             </tr>
-                            <tr>
-                                <td>🇩🇰 <span data-i18n="dkk_full">Danish Krone</span> (DKK)</td>
-                                <td>0.1305</td>
-                                <td>0.1376</td>
+                             <tr>
+                                <td><img src="/images/flags/dk.svg" alt="DKK" class="currency-flag"> DKK</td>
+                                <td class="rate-buy rate-buy-DKK">---</td>
+                                <td class="rate-sell rate-sell-DKK">---</td>
                             </tr>
-                            <tr>
-                                <td>🇬🇧 <span data-i18n="gbp_full">British Pound</span> (GBP)</td>
-                                <td>1.1649</td>
-                                <td>1.228</td>
+                             <tr>
+                                <td><img src="/images/flags/gb.svg" alt="GBP" class="currency-flag"> GBP</td>
+                                <td class="rate-buy rate-buy-GBP">---</td>
+                                <td class="rate-sell rate-sell-GBP">---</td>
                             </tr>
-                            <tr>
-                                <td>🇨🇭 <span data-i18n="chf_full">Swiss Franc</span> (CHF)</td>
-                                <td>1.0202</td>
-                                <td>1.0756</td>
-                            </tr>
-                            <tr>
-                                <td>🇵🇱 <span data-i18n="pln_full">Polish Złoty</span> (PLN)</td>
-                                <td>0.2338</td>
-                                <td>0.2464</td>
-                            </tr>
-                            <tr>
-                                <td>🇨🇿 <span data-i18n="czk_full">Czech Koruna</span> (CZK)</td>
-                                <td>0.0391</td>
-                                <td>0.0413</td>
+                             <tr>
+                                <td><img src="/images/flags/ch.svg" alt="CHF" class="currency-flag"> CHF</td>
+                                <td class="rate-buy rate-buy-CHF">---</td>
+                                <td class="rate-sell rate-sell-CHF">---</td>
                             </tr>
                         </tbody>
                     </table>
-                </div>
-                <div class="text-end mt-2">
-                    <small class="text-muted"><span data-i18n="last_updated">Last updated</span>: <span id="last-update-time">-</span></small>
+                    <p class="text-center text-muted mt-2 mb-0"><small class="last-updated">Last updated: Unknown</small></p>
                 </div>
             </div>
         </section>
@@ -550,7 +539,7 @@
                     <ul class="footer-links">
                         <li><a href="/">Home</a></li>
                         <li><a href="/currencies">Currencies</a></li>
-                        <li><a href="/contact-2" data-i18n="contact">Contact</a></li>
+                        <li><a href="/contact" data-i18n="contact">Contact</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4 mb-4">

@@ -1,0 +1,35 @@
+{
+  "name": "moneychange",
+  "version": "1.0.0",
+  "description": "Currency exchange website for Torrevieja",
+  "main": "index.html",
+  "scripts": {
+    "dev": "http-server -a localhost -p 8000 -c-1",
+    "start": "http-server -p 8000",
+    "backend": "cd backend && npm run develop",
+    "backend:build": "cd backend && npm run build",
+    "backend:start": "cd backend && npm run start",
+    "deploy": "echo \"No deploy script configured yet\"",
+    "test": "echo \"No test script configured yet\""
+  },
+  "keywords": [
+    "currency",
+    "exchange",
+    "money",
+    "torrevieja",
+    "spain"
+  ],
+  "author": "MoneyChange",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/personaz1/moneychange.git"
+  },
+  "bugs": {
+    "url": "https://github.com/personaz1/moneychange/issues"
+  },
+  "homepage": "https://github.com/personaz1/moneychange#readme",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+} 

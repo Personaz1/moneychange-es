@@ -1,8 +1,7 @@
 class ExchangeRatesDisplay {
     constructor() {
-        // Ищем обе таблицы (на главной и на prices)
-        this.mainPageTable = document.getElementById('mainPageRatesTable');
-        this.pricesPageTable = document.querySelector('.rates-section .rates-table tbody');
+        // Ищем таблицы на всех страницах по единому ID
+        this.ratesTables = document.querySelectorAll('#mainPageRatesTable');
         
         this.lastUpdatedElements = document.querySelectorAll('.last-updated');
         this.tickerContent = document.getElementById('ticker-content');
@@ -39,12 +38,11 @@ class ExchangeRatesDisplay {
             const rates = await response.json();
             console.log("Strapi Rates Data received:", rates);
             
-            // Обновляем таблицы
-            if (this.mainPageTable) {
-                this.updateRatesTable(this.mainPageTable, rates);
-            }
-            if (this.pricesPageTable) {
-                this.updateRatesTable(this.pricesPageTable, rates);
+            // Обновляем все таблицы по единому ID
+            if (this.ratesTables && this.ratesTables.length > 0) {
+                this.ratesTables.forEach(table => {
+                    this.updateRatesTable(table, rates);
+                });
             }
             
             // Обновляем тикер

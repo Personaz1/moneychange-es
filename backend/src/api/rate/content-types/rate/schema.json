@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "rates",
+  "info": {
+    "singularName": "rate",
+    "pluralName": "rates",
+    "displayName": "Rate"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "base_currency": {
+      "type": "string",
+      "required": true
+    },
+    "quote_currency": {
+      "type": "string",
+      "required": true
+    },
+    "rate_value": {
+      "type": "decimal",
+      "required": true
+    },
+    "manual_override": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}
