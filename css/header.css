@@ -1,0 +1,192 @@
+/* Стили для бегущей строки */
+.currency-ticker-container {
+    width: 100vw;
+    overflow: hidden;
+    color: white;
+    padding: 8px 0;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-top: 0;
+    background-color: #000000;
+}
+
+/* Скрываем контейнер тикера акций, он больше не используется */
+.stocks-ticker-container {
+    display: none;
+}
+
+.currency-ticker {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.ticker-content {
+    display: inline-flex;
+    animation: ticker 180s linear infinite;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+}
+
+/* Скрываем устаревшие стили */
+.stocks-content {
+    display: none;
+}
+
+.ticker-content span {
+    display: inline-block;
+    padding: 0 25px;
+    margin: 0 5px;
+}
+
+.ticker-content span strong {
+    font-weight: 700;
+    margin-right: 5px;
+}
+
+/* Скрываем устаревшие стили */
+.stocks-content .text-success,
+.stocks-content .text-danger {
+    display: none;
+}
+
+@keyframes ticker {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Стили для шапки */
+.header-top {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 5px 0;
+}
+
+.header-location {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.header-phone {
+    font-size: 13px;
+}
+
+.logo-wrapper {
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    display: inline-block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.logo-text {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0;
+    color: var(--primary-dark);
+}
+
+.logo-text span {
+    color: var(--primary-color);
+}
+
+.logo-subtitle {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0;
+    color: var(--text-dark);
+}
+
+.logo-subtitle .highlight {
+    background-color: var(--primary-light);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 3px;
+}
+
+.main-nav {
+    background-color: white;
+    border-radius: 30px;
+    padding: 5px;
+    margin-bottom: 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.main-nav .nav-link {
+    color: var(--text-dark) !important;
+    font-weight: 500;
+    padding: 8px 15px !important;
+}
+
+.main-nav .nav-link:hover,
+.main-nav .nav-link.active {
+    color: var(--primary-color) !important;
+}
+
+.contact-btn {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 5px;
+    border: none;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.contact-btn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    color: white;
+    text-decoration: none;
+}
+
+/* Стиль кнопки переключения темы */
+#theme-toggle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: var(--primary-dark);
+    transition: all 0.3s ease;
+}
+
+html[data-theme="light"] #theme-toggle {
+    background-color: var(--primary-dark);
+}
+
+html[data-theme="light"] #theme-toggle i {
+    color: white;
+}
+
+/* Стиль переключателя языка */
+.language-flags {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.language-flags img {
+    transition: transform 0.2s ease;
+}
+
+.language-flags img:hover {
+    transform: scale(1.1);
+} 
