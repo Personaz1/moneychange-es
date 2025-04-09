@@ -1,0 +1,149 @@
+.calculator-section {
+    padding: 2rem 0;
+    background: var(--surface-card);
+    border-radius: 1rem;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    margin: 2rem 0;
+}
+
+.calculator-card {
+    background: var(--surface-section);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.calculator-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.calculator-input {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.calculator-input input,
+.calculator-input select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--surface-border);
+    border-radius: 0.5rem;
+    background: var(--surface-ground);
+    color: var(--text-color);
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.calculator-input input:focus,
+.calculator-input select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.2);
+    outline: none;
+}
+
+.calculator-result {
+    background: var(--surface-hover);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.result-amount {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin: 0.5rem 0;
+}
+
+.result-currency {
+    font-size: 1.2rem;
+    color: var(--text-color-secondary);
+}
+
+.rate-info {
+    font-size: 0.9rem;
+    color: var(--text-color-secondary);
+    margin-top: 1rem;
+}
+
+.switch-currencies {
+    background: var(--primary-color);
+    color: var(--primary-color-text);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.switch-currencies:hover {
+    background: var(--primary-600);
+    transform: rotate(180deg);
+}
+
+.switch-currencies.rotate {
+    animation: rotate360 0.3s ease;
+}
+
+.copy-btn {
+    background: var(--surface-ground);
+    border: 1px solid var(--surface-border);
+    color: var(--text-color-secondary);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.copy-btn:hover {
+    background: var(--surface-hover);
+    color: var(--primary-color);
+}
+
+.copy-btn.copied {
+    background: var(--green-500);
+    color: white;
+}
+
+.highlight {
+    animation: highlight 0.3s ease;
+}
+
+@keyframes rotate360 {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes highlight {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .calculator-card {
+    background: var(--surface-card);
+}
+
+[data-theme="dark"] .calculator-input input,
+[data-theme="dark"] .calculator-input select {
+    background: var(--surface-section);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .calculator-section {
+        padding: 1rem;
+    }
+    
+    .result-amount {
+        font-size: 1.5rem;
+    }
+} 
