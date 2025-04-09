@@ -68,4 +68,172 @@
 - Курсы рассчитываются по формуле:
   - Курс покупки = базовый курс * (1 - маржа 2.6%)
   - Курс продажи = базовый курс * (1 + маржа 2.6%)
-- Базовые курсы могут быть переопределены вручную через админку Strapi 
+- Базовые курсы могут быть переопределены вручную через админку Strapi
+
+# Руководство по разработке
+
+## Архитектура проекта
+
+### Frontend
+
+Фронтенд построен на чистом JavaScript (ES6+) с использованием модульной архитектуры:
+
+- `calculator.js` - Калькулятор валют
+  - Поддерживает все основные валюты
+  - Автоматический расчет кросс-курсов через EUR
+  - Учет комиссии при конвертации
+  - Валидация ввода
+  - Форматирование сумм
+
+- `exchange-rates.js` - Работа с курсами валют
+  - Загрузка курсов из API
+  - Кэширование в localStorage
+  - Автоматическое обновление
+  - Отображение в таблице
+
+- `locale.js` - Система локализации
+  - Поддержка EN, ES, RU
+  - Динамическая загрузка переводов
+  - Сохранение выбранного языка
+
+- `theme.js` - Управление темой
+  - Светлая/темная тема
+  - Сохранение выбранной темы
+  - Автоматическое определение системной темы
+
+### Backend (Strapi)
+
+Бэкенд реализован на Strapi CMS:
+
+```
+backend/
+├── src/
+│   ├── api/
+│   │   └── rates/
+│   │       ├── controllers/  # Логика API
+│   │       ├── routes/       # Маршруты API
+│   │       └── services/     # Бизнес-логика
+│   └── config/
+│       ├── database.js      # Настройки БД
+│       └── server.js        # Настройки сервера
+└── data/
+    └── data.db             # SQLite база
+```
+
+#### API Endpoints
+
+- `GET /api/rates` - Получение всех курсов
+- `GET /api/rates/:id` - Получение курса по ID
+- `POST /api/rates` - Создание нового курса
+- `PUT /api/rates/:id` - Обновление курса
+- `DELETE /api/rates/:id` - Удаление курса
+
+Формат данных:
+```json
+{
+  "currency": "USD",
+  "buy": 1.05,
+  "sell": 1.08,
+  "updatedAt": "2024-04-09T10:00:00.000Z"
+}
+```
+
+## Разработка
+
+### Установка зависимостей
+
+Frontend не требует установки зависимостей.
+
+Backend (Strapi):
+```bash
+cd backend
+npm install
+```
+
+### Запуск для разработки
+
+1. Frontend:
+```bash
+python -m http.server 8000
+```
+
+2. Backend:
+```bash
+cd backend
+npm run develop
+```
+
+### Сборка для продакшена
+
+1. Frontend - минифицировать JS/CSS:
+```bash
+npm run build
+```
+
+2. Backend:
+```bash
+cd backend
+NODE_ENV=production npm run build
+```
+
+## Деплой
+
+### Подготовка
+
+1. Настроить SSL:
+```bash
+certbot certonly --webroot
+```
+
+2. Создать конфиг Nginx/Apache
+3. Настроить права доступа:
+```bash
+chown -R www-data:www-data /var/www/moneychange
+chmod -R 755 /var/www/moneychange
+```
+
+### Запуск
+
+1. Frontend - скопировать файлы:
+```bash
+rsync -av --delete dist/ /var/www/moneychange/
+```
+
+2. Backend:
+```bash
+cd backend
+NODE_ENV=production npm start
+```
+
+## Git Workflow
+
+1. Разработка ведется в ветках:
+   - `main` - основная ветка
+   - `feature/*` - новый функционал
+   - `fix/*` - исправления
+   
+2. Перед мержем:
+   - Проверить работу калькулятора
+   - Проверить все языки
+   - Проверить темы
+   - Проверить API
+
+## Исключения в .gitignore
+
+```
+# Backend
+backend/.cache/
+backend/.tmp/
+backend/build/
+backend/.env
+backend/public/uploads/
+backend/exports/
+backend/.strapi-updater.json
+backend/data/
+backend/dist/
+
+# Frontend
+.DS_Store
+node_modules/
+dist/
+*.log 

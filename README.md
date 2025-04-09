@@ -1,19 +1,128 @@
-# MoneyChange - Torrevieja Currency Exchange
+# MoneyChange - Современный сайт обмена валют
 
-Сайт обмена валют в Торревьехе, Испания.
+Проект представляет собой современный, лаконичный и удобный сайт для обмена валют с актуальными курсами.
+
+## Особенности
+
+* Современный дизайн с адаптивной вёрсткой
+* Интерактивный калькулятор обмена валют:
+  * Поддержка основных валют (EUR, USD, CAD, NOK, SEK, DKK, GBP, CHF)
+  * Автоматический расчет кросс-курсов через EUR
+  * Учет комиссии 2.6% при конвертации
+  * Двойная комиссия при кросс-конвертации
+* Автоматическое обновление курсов валют через API
+* Мультиязычность (EN, ES, RU)
+* Административная панель для управления курсами
+* Темная/светлая тема
+
+## Технологии
+
+* Frontend:  
+   * HTML5, CSS3  
+   * JavaScript (ES6+)  
+   * Bootstrap 5  
+   * Поддержка мобильных устройств
+* Backend:  
+   * Strapi CMS (Node.js)  
+   * SQLite база данных  
+   * RESTful API для курсов валют
+* Деплой:
+   * Nginx/Apache конфигурация
+   * SSL/HTTPS поддержка
+   * Кэширование статики
+
+## Установка и запуск
+
+### Frontend
+
+1. Клонировать репозиторий:
+```bash
+git clone https://github.com/Personaz1/moneychange-es.git
+cd moneychange-es
+```
+
+2. Запустить локальный сервер:
+```bash
+python -m http.server 8000
+```
+
+3. Открыть в браузере: http://localhost:8000
+
+### Backend (Strapi)
+
+1. Перейти в директорию backend:
+```bash
+cd backend
+```
+
+2. Установить зависимости:
+```bash
+npm install
+```
+
+3. Запустить Strapi:
+```bash
+npm run develop
+```
+
+4. Открыть админку: http://localhost:1337/admin
 
 ## Структура проекта
 
-- `index.html` - Главная страница
-- `prices.html` - Страница с курсами валют
-- `contact.html` - Контактная страница
-- `js/` - JavaScript файлы
-  - `exchange-rates.js` - Основной файл для отображения курсов валют
-  - `locale.js` - Многоязычность
-  - `locales/` - Переводы
-- `css/` - Стили
-- `images/` - Изображения
-- `backend/` - Strapi бэкэнд для API курсов валют
+```
+├── css/                # Стили проекта
+│   ├── style.css      # Основные стили
+│   └── calculator.css  # Стили калькулятора
+├── js/                 # JavaScript файлы
+│   ├── calculator.js   # Калькулятор валют
+│   ├── exchange-rates.js # Работа с курсами
+│   ├── locale.js      # Мультиязычность
+│   ├── theme.js       # Темная/светлая тема
+│   └── locales/       # Файлы переводов
+├── images/            # Изображения и ресурсы
+│   ├── flags/        # Флаги валют
+│   └── team/         # Фото команды
+├── backend/          # Бэкенд на Strapi
+│   ├── src/api/     # API контроллеры
+│   └── config/      # Конфигурация Strapi
+├── index.html       # Главная страница
+├── prices.html      # Страница с курсами
+├── contact.html     # Контакты
+├── nginx.conf       # Конфигурация Nginx
+├── .htaccess        # Конфигурация Apache
+└── DEVELOPMENT.md   # Документация разработки
+```
+
+## Деплой
+
+### Nginx
+
+1. Установить SSL сертификаты:
+```bash
+certbot certonly --webroot -w /var/www/moneychange -d moneychange.es -d www.moneychange.es
+```
+
+2. Использовать конфигурацию из `nginx.conf`
+3. Настроить права доступа:
+```bash
+chown -R www-data:www-data /var/www/moneychange
+chmod -R 755 /var/www/moneychange
+```
+
+### Apache
+
+1. Включить необходимые модули:
+```bash
+a2enmod rewrite
+a2enmod headers
+a2enmod expires
+```
+
+2. Использовать конфигурацию из `.htaccess`
+
+## Разработка
+
+Подробная информация о разработке находится в файле [DEVELOPMENT.md](DEVELOPMENT.md)
 
 ## Настройка сервера
 
