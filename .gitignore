@@ -30,10 +30,19 @@ Thumbs.db
 *.sublime-project
 *.sublime-workspace
 
-# База данных и загруженные файлы
-backend/.tmp
-backend/public/uploads
-backend/data
+# Strapi бэкенд
+backend/.cache/
+backend/.tmp/
+backend/.env
+backend/build/
+backend/public/uploads/
+backend/exports/
+backend/.strapi-updater.json
+backend/license.txt
+backend/.editorconfig
+backend/dist/
+backend/build/
+backend/data/
 
 # Сборки
 build/
