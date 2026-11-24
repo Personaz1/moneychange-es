@@ -1,0 +1,3 @@
+# Agent instructions
+
+Treat this as a currency-information product, not a payment or financial-advice system. Before changes, map the frontend/backend, provider sources, rate timestamps, conversion precision, rounding, caching and fallback behavior. Never commit API keys or production data. Do not claim a rate is live unless its provider and timestamp are visible. Add tests for rounding, stale data, missing providers and currency edge cases. Do not deploy or alter production integrations without approval.
