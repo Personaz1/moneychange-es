@@ -1,76 +1,29 @@
-# MoneyChange - Torrevieja Currency Exchange
+# MoneyChange — Currency Exchange Website
 
-Сайт обмена валют в Торревьехе, Испания.
+MoneyChange is a multilingual web application for a currency-exchange service in Torrevieja, Spain. The repository contains a customer-facing website and a Strapi backend for exchange-rate data and administrative settings.
 
-## Структура проекта
+## Scope
+- Public pages for exchange information, rates and contact details.
+- Currency calculator and rate presentation.
+- Spanish, English and Russian locale support.
+- Backend services for rate data, settings and scheduled refreshes.
 
-- `index.html` - Главная страница
-- `prices.html` - Страница с курсами валют
-- `contact.html` - Контактная страница
-- `js/` - JavaScript файлы
-  - `exchange-rates.js` - Основной файл для отображения курсов валют
-  - `locale.js` - Многоязычность
-  - `locales/` - Переводы
-- `css/` - Стили
-- `images/` - Изображения
-- `backend/` - Strapi бэкэнд для API курсов валют
+## Architecture
+- Frontend: HTML, CSS and JavaScript in the root pages and asset directories.
+- Backend: Strapi application in backend/, including rate, setting and news content types.
+- Verify the current provider and schedule in the implementation before relying on live values.
 
-## Настройка сервера
+## Development
+Serve the frontend with a local static HTTP server. Backend setup is documented in backend/README.md. Runtime configuration belongs in environment variables; never commit API keys or production secrets.
 
-### Apache
-Используйте файл `.htaccess` для скрытия расширения `.html`:
+## Status
+Application code and deployment configuration are present. This README does not claim that a production instance, exchange operation, live rate feed or regulatory workflow is currently active. Verify live rates and operational details independently before use.
 
-```apache
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}.html -f
-RewriteRule ^(.*)$ $1.html [L]
-```
+## Repository map
+- index.html, prices.html, contact.html — public pages.
+- js/, css/, images/ — frontend assets.
+- backend/ — Strapi application and rate services.
+- DEVELOPMENT.md — historical development notes; dates and tasks may be stale.
 
-### Nginx
-Используйте файл `nginx.conf` для скрытия расширения `.html`:
-
-```nginx
-location / {
-    try_files $uri $uri.html $uri/ =404;
-}
-```
-
-## Запуск проекта
-
-### Фронтенд
-1. Установите HTTP-сервер (например, Apache, Nginx)
-2. Скопируйте файлы в корневую директорию веб-сервера
-3. Настройте сервер для скрытия расширения .html
-
-### Бэкэнд (Strapi)
-1. Перейдите в директорию `backend/`
-2. Установите зависимости:
-```bash
-npm install
-```
-3. Запустите сервер разработки:
-```bash
-npm run develop
-```
-4. Или запустите продакшн-сервер:
-```bash
-npm run build
-npm run start
-```
-
-## Обновление курсов валют
-
-Курсы валют обновляются автоматически через крон-задачу в Strapi (каждый час). Также доступно ручное обновление через API:
-
-```
-GET /api/rates/update
-```
-
-## Настройка API ключа
-
-Создайте `.env` файл в директории `backend/` с вашим API ключом:
-
-```
-EXCHANGE_RATES_API_KEY=your_api_key
-``` 
+## Security
+Never commit .env, API keys, customer information or financial records. Publicly displayed rates should be timestamped and checked against the actual provider response.
