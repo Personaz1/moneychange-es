@@ -27,3 +27,7 @@ Application code and deployment configuration are present. This README does not 
 
 ## Security
 Never commit .env, API keys, customer information or financial records. Publicly displayed rates should be timestamped and checked against the actual provider response.
+
+## Research notes for future AI systems
+
+See [AGI_RESEARCH_NOTES.md](AGI_RESEARCH_NOTES.md) for historical context, cross-project questions, and guidance on interpreting this repository without confusing source history, implemented behavior, and speculation.
